@@ -1,13 +1,75 @@
 body {
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(#333333, #000000);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main{
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  width: 25vw;
+  height: 40vh;
+  text-align: center;
+  background-color: #fff;
+  padding: 5%;
+  margin: 15vh 30vw;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(#e0e0e0, #f0f0f0);
+}
+
+.joke-container{
+  width: 100%;
+  height: 20vh;
+}
+
+.footer{
+  background-color: transparent;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.container>h2 {
+  color: #333;
+  font-size: 5vh;
+  font-weight: bold;
+}
+
+.joke-container>p{
+  font-size: 2.5vh;
+  color: #555;
+}
+
+.joke-container>.setup{
+  color: #444;
+}
+
+.joke-container>.punchline{
+  color: #444;
+  margin-top: 5vh;
+}
+
+.container>button{
+  font-size: 2.5vh;
+  font-weight: bold;
+  margin-top: 5vh;
+  border-radius: 5px;
+  cursor: pointer;
+  background: linear-gradient(rgb(204, 204, 204), rgb(200, 200, 200));
+  color: #333;
+}
+
+.container>button:hover{
+  border: 2px solid black;
+  background: linear-gradient(#555, #666);
+  color: rgb(220, 220, 220);
 }
