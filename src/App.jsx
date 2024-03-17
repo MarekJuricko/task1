@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback} from 'react';
+import BTCPriceContext from './components/BTCPriceContext';
+import BTCPrice from './components/BTCPrice';
 
 const App = () => {
   // State variables to hold Bitcoin price and joke data
@@ -22,15 +24,15 @@ const App = () => {
   };
 
   // Function to fetch the current Bitcoin price from an API
-  const getBtcPrice = async () => {
+  const getBtcPrice = useCallback(async () => {
     try {
-      const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
-      const data = await response.json();
-      setBitcoinPrice(data.bpi.EUR.rate);
+        const response = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
+        const data = await response.json();
+        setBitcoinPrice(data.bpi.USD.rate);
     } catch (error) {
-      console.error('Error fetching Bitcoin price data:', error);
+        console.error('Error fetching Bitcoin price data:', error);
     }
-  };
+}, []);
 
   // useEffect hook to fetch initial data and set up an interval for Bitcoin price updates
   useEffect(() => {
@@ -41,11 +43,11 @@ const App = () => {
     // Interval for Bitcoin price updates
     intervalRef.current = setInterval(() => {
       getBtcPrice();
-    }, 5000);
+    }, 2500);
 
     // Clearing the interval
     return () => clearInterval(intervalRef.current);
-  }, []); 
+  }, [getBtcPrice]); 
 
   return (
     <div className='main'>
@@ -57,10 +59,9 @@ const App = () => {
         </div>
         <button onClick={getJoke}>Get another one</button>
       </div>
-      <div className='footer'>
-        <h2>Bitcoin</h2>
-        <h3>Current Price: {bitcoinPrice} EUR</h3>
-      </div>
+      <BTCPriceContext.Provider value={{bitcoinPrice}}>
+        <BTCPrice/>
+      </BTCPriceContext.Provider>
     </div>
   );
 };
